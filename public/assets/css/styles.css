@@ -1,0 +1,276 @@
+:root {
+  --surface-color: #fff;
+  --curve: 40;
+  --card-height: 300px;
+  --card-width: calc(var(--card-height) / 1.5);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  position: relative;
+  width: 100vw;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+}
+
+
+.swiper {
+  width: 100%;
+  height: 430px; /* Atur tinggi slider image sesuai kebutuhan */
+  display: flex;
+  justify-content: center; /* Mengatur posisi slider image di tengah */
+  align-items: center; /* Mengatur posisi slider image di tengah */
+  border-radius: 20px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 30%; /* Atur lebar slider image sesuai kebutuhan */
+  height: 100%;
+  transition: all 0.3s; /* Tambahkan transisi agar perubahan lebar slider halus */
+}
+
+.swiper-slide.swiper-slide-active {
+  width: 90%; /* Atur lebar slider image aktif (posisi tengah) sesuai kebutuhan */
+  z-index: 2; /* Mengatur posisi slider image aktif di atas slide lainnya */
+}
+
+.swiper-slide-prev,
+.swiper-slide-next {
+  width: 20%; /* Atur lebar slider image sebelumnya dan setelahnya (posisi kiri dan kanan) sesuai kebutuhan */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), -2px -2px 4px rgba(255, 255, 255, 0.2);
+  height: 350px!important;
+  margin-top:3.5%;
+  border-radius: 50px;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), -2px -2px 4px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+
+
+.card-specials {
+  width: var(--card-width);
+  height: var(--card-height);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 0 36px;
+  perspective: 2500px;
+  margin: 0 50px;
+}
+
+.cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.specials-wrapper {
+  transition: all 0.5s;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
+.card-specials:hover .specials-wrapper {
+  transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+  box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+}
+
+.specials-wrapper::before,
+.specials-wrapper::after {
+  content: "";
+  opacity: 0;
+  width: 100%;
+  height: 80px;
+  transition: all 0.5s;
+  position: absolute;
+  left: 0;
+}
+.specials-wrapper::before {
+  top: 0;
+  height: 100%;
+  background-image: linear-gradient(
+    to top,
+    transparent 46%,
+    rgba(12, 13, 19, 0.5) 68%,
+    rgba(12, 13, 19) 97%
+  );
+}
+.specials-wrapper::after {
+  bottom: 0;
+  opacity: 1;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 46%,
+    rgba(12, 13, 19, 0.5) 68%,
+    rgba(12, 13, 19) 97%
+  );
+}
+
+.card-specials:hover .specials-wrapper::before,
+.specials-wrapper::after {
+  opacity: 1;
+}
+
+.card-specials:hover .specials-wrapper::after {
+  height: 120px;
+}
+.title {
+  width: 100%;
+  transition: transform 0.5s;
+}
+.card-specials:hover .title {
+  transform: translate3d(0%, -50px, 100px);
+}
+
+.character {
+  width: 100%;
+  opacity: 0;
+  transition: all 0.5s;
+  position: absolute;
+  z-index: -1;
+}
+
+.card-specials:hover .character {
+  opacity: 1;
+  transform: translate3d(0%, -30%, 100px);
+}
+
+
+.car{
+  cursor: url('/public/assets/img/cursor/icons8-car-48.png'), auto;
+}
+
+.motor{
+  cursor: url('/public/assets/img/cursor/icons8-motorbike-48.png'), auto;
+}
+
+#toastContainer {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+ }
+
+ .toast {
+    position: relative;
+    display: inline-block;
+    background-color: rgba(3, 158, 88, 0.9);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.3s, transform 0.3s;
+ }
+
+ .toast.show {
+    opacity: 1;
+    transform: translateY(0);
+ }
+
+ .toast.hide {
+    opacity: 0;
+    transform: translateY(100%);
+ }
+
+
+.icon-car {
+  background: url('/public/assets/img/cursor/icons8-car-48.png') no-repeat center center;
+  width: 70px;
+  height: 70px;
+  padding: 7px;
+  display: flex;
+}
+
+.icon-motor {
+  background: url('/public/assets/img/cursor/icons8-motorbike-48.png') no-repeat center center;
+  width: 70px;
+  height: 70px;
+  padding: 7px;
+  display: flex;
+}
+
+
+.struk {
+  border: 1px solid #ccc;
+  width: 125px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-left: -1.5rem;
+  margin-top: -1rem;
+}
+
+.header {
+  text-align: left;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.title {
+  font-size: 11px;
+  font-weight: bold;
+}
+
+
+.item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.label {
+  font-size: 10px;
+  color: #777;
+}
+
+.value {
+  font-size: 10px;
+  font-weight: bold;
+  color: #333;
+  white-space: pre-wrap;
+}
+
+iframe {
+  border: none;
+  padding: 0;
+}
