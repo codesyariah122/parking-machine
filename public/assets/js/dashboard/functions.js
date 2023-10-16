@@ -148,9 +148,11 @@ function formatDateToIndonesian(dateString) {
 	// Membuat format tanggal sesuai format Indonesia (DD/MM/YYYY HH:mm:ss)
 	const formattedDate = `${day.toString().padStart(2, "0")}/${month
 		.toString()
-		.padStart(2, "0")}/${year} ${hours.toString().padStart(2, "0")}:${minutes
+		.padStart(2, "0")}/${year} ${hours
 		.toString()
-		.padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+		.padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds
+		.toString()
+		.padStart(2, "0")}`;
 
 	return formattedDate;
 }
@@ -181,9 +183,7 @@ const setUpPagination = (data) => {
 			? "bg-gray-900 border-blue-300 text-white cursor-pointer"
 			: "bg-gray-700 border-gray-300 text-white cursor-not-allowed"
 	}" data-num="${
-		paging.aktifPage < paging.totalPage
-			? paging.aktifPage + 1
-			: paging.aktifPage + 1
+		paging.aktifPage < paging.totalPage ? paging.aktifPage + 1 : null
 	}">Next&nbsp;<i class="fa-solid fa-angle-right"></i></a></li>
 	`;
 
@@ -245,7 +245,10 @@ const getAllData = (type, page = 1, keyword = "") => {
 						const hoursDifference = Math.floor(
 							timeDifferenceMs / (1000 * 60 * 60),
 						);
-						const numberWithCommas = ticket.harga.replace(/\./g, "");
+						const numberWithCommas = ticket.harga.replace(
+							/\./g,
+							"",
+						);
 						const angka = parseInt(numberWithCommas);
 						const totalPrice = hoursDifference * angka;
 
@@ -487,7 +490,10 @@ const searchData = (param, type) => {
 						const hoursDifference = Math.floor(
 							timeDifferenceMs / (1000 * 60 * 60),
 						);
-						const numberWithCommas = ticket.harga.replace(/\./g, "");
+						const numberWithCommas = ticket.harga.replace(
+							/\./g,
+							"",
+						);
 						const angka = parseInt(numberWithCommas);
 						const totalPrice = hoursDifference * angka;
 
@@ -651,6 +657,7 @@ function watchDataChanges() {
 					localStorage.setItem("lastData", JSON.stringify(lastData));
 
 					const toastMessage = `Payment code : ${lastData.data[0].barcode}, ${typeMessage}`;
+
 					showToast(toastMessage);
 				}
 			},
